@@ -3,6 +3,8 @@ package com.higherEducationGuid.restful.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 /**
  * Created by I.S.M. ARHAM on 5/9/2017.
  */
@@ -18,16 +20,15 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
-    @Column(name = "fullname", length = 255)
-    private String fullname;
+    @Column(name = "name", length = 255)
+    private String name;
+    @Column(name = "username", length = 255)
+    private String username;
     @Column(name = "email", length = 255)
     private String email;
     @Column(name = "password", length = 255)
     private String password;
-    @Column(name = "address", length = 255)
-    private String address;
-    @Column(name = "phone")
-    private Long phone;
+
 
     public User(){}
 
@@ -37,19 +38,10 @@ public class User implements Serializable {
 
     public User(Long id, String fullname, String email, String password, String address, Long phone) {
         this.id = id;
-        this.fullname = fullname;
+        this.name = fullname;
         this.email = email;
         this.password = password;
-        this.address = address;
-        this.phone = phone;
-    }
 
-    public User(String fullname, String email, String password, String address, Long phone) {
-        this.fullname = fullname;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.phone = phone;
     }
 
     public Long getId() {
@@ -60,12 +52,20 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getName() {
+        return name;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -84,20 +84,8 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Long getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Long phone) {
-        this.phone = phone;
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(this.password);
     }
 
     @Override

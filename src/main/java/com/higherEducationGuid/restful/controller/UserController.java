@@ -22,37 +22,37 @@ public class UserController {
 
     final static Logger logger = Logger.getLogger(User.class);
 
-    //get driver
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<User> getDriver(@PathVariable("id") Long id){
-        User user = userService.getUserById(id);
-        if(user == null){
-            logger.debug("User with id " + id + " does not exists");
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-        }
-        logger.debug("Found User: " + user);
-        return new ResponseEntity<User>(user,HttpStatus.OK);
-    }
+//    //get driver
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public ResponseEntity<User> getDriver(@PathVariable("id") Long id){
+//        User user = userService.getUserById(id);
+//        if(user == null){
+//            logger.debug("User with id " + id + " does not exists");
+//            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+//        }
+//        logger.debug("Found User: " + user);
+//        return new ResponseEntity<User>(user,HttpStatus.OK);
+//    }
 
     //get drivers list
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<User>> getAllDrivers() {
-        List<User> usersList = userService.getUsersList();
-        if (usersList.isEmpty()) {
-            logger.debug("Users does not exists");
-            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
-        }
-        logger.debug("Found " + usersList.size() + " Users");
-        logger.debug(Arrays.toString(usersList.toArray()));
-        return new ResponseEntity<List<User>>(usersList, HttpStatus.OK);
-    }
+//    @RequestMapping(method = RequestMethod.GET)
+//    public ResponseEntity<List<User>> getAllDrivers() {
+//        List<User> usersList = userService.getUsersList();
+//        if (usersList.isEmpty()) {
+//            logger.debug("Users does not exists");
+//            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
+//        }
+//        logger.debug("Found " + usersList.size() + " Users");
+//        logger.debug(Arrays.toString(usersList.toArray()));
+//        return new ResponseEntity<List<User>>(usersList, HttpStatus.OK);
+//    }
 
-    //add driver
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<User> addDriver(@RequestBody User user){
-        User persistUser = userService.addUser(user);
-        logger.debug("Added:: " + persistUser);
-        return new ResponseEntity<User>(persistUser,HttpStatus.CREATED);
-    }
+//    //add driver
+//    @RequestMapping(value = "/add", method = RequestMethod.POST)
+//    public ResponseEntity<User> addDriver(@RequestBody User user){
+//        User persistUser = userService.addUser(user);
+//        logger.debug("Added:: " + persistUser);
+//        return new ResponseEntity<User>(persistUser,HttpStatus.CREATED);
+//    }
 
 }
