@@ -8,7 +8,11 @@ import java.util.List;
  * Created by I.S.M. ARHAM on 5/9/2017.
  */
 public interface NewCoursesService {
-    NewCourses addNewCourses(NewCourses newCourses);
     List<NewCourses> getNewCoursesList();
+    NewCourses getNewCoursesById(int id);
+
+    NewCourses addNewCourses(NewCourses newCourses);
+    NewCourses editNewCourses(NewCourses newCourses);
+    void deleteNewCourses(int id);
 
 }

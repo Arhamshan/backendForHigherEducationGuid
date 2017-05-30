@@ -16,8 +16,12 @@ public class NewCourses implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private int id;
+    @Column(name = "institue", length = 255)
+    private String institue;
     @Column(name = "title", length = 255)
     private String title;
+    @Column(name = "level", length = 255)
+    private String level;
     @Column(name = "alstreem", length = 255)
     private String alstreem;
     @Column(name = "alresult", length = 255)
@@ -26,19 +30,24 @@ public class NewCourses implements Serializable {
     private String olresult;
     @Column(name = "courseperiod", length = 255)
     private String courseperiod;
+    @Column(name = "coursedetails", length = 255)
+    private String coursedetails;
 
 
     public NewCourses(){}
 
     public NewCourses(int id){this.id = id;}
 
-    public NewCourses(int id, String title, String alstreem, String alresult, String olresult, String courseperiod){
+    public NewCourses(int id, String institue, String title, String level, String alstreem, String alresult, String olresult, String courseperiod, String coursedetails){
         this.id = id;
+        this.institue = institue;
         this.title = title;
+        this.level=level;
         this.alstreem = alstreem;
         this.alresult = alresult;
         this.olresult = olresult;
         this.courseperiod = courseperiod;
+        this.coursedetails=coursedetails;
     }
 
     public int getId() {
@@ -47,6 +56,14 @@ public class NewCourses implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getInstitue() {
+        return institue;
+    }
+
+    public void setInstitue(String institue) {
+        this.institue = institue;
     }
 
     public String getTitle() {
@@ -89,7 +106,23 @@ public class NewCourses implements Serializable {
         this.courseperiod = courseperiod;
     }
 
-//    @Override
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getCoursedetails() {
+        return coursedetails;
+    }
+
+    public void setCoursedetails(String coursedetails) {
+        this.coursedetails = coursedetails;
+    }
+
+    //    @Override
 //    public boolean equals(Object obj) {
 //        if (this == obj)
 //            return true;

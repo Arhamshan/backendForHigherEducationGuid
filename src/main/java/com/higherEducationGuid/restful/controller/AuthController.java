@@ -75,6 +75,7 @@ public class AuthController {
         }
 
         signupUser.encodePassword(this.passwordEncoder);
+        signupUser.setUserRole(2);
         this.userService.save(signupUser);
         return this.tokenProvider.createToken(signupUser.getUsername());
     }

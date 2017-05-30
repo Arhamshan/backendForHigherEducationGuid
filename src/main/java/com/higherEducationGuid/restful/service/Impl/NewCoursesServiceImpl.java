@@ -26,4 +26,19 @@ public class NewCoursesServiceImpl implements NewCoursesService {
     public List<NewCourses> getNewCoursesList(){
         return newCoursesRepository.findAll();
     }
+
+    @Override
+    public NewCourses getNewCoursesById(int id) {
+        return newCoursesRepository.findOne(id);
+    }
+
+    @Override
+    public NewCourses editNewCourses(NewCourses newCourses) {
+        return newCoursesRepository.save(newCourses);
+    }
+
+    @Override
+    public void deleteNewCourses(int id) {
+        newCoursesRepository.delete(id);
+    }
 }

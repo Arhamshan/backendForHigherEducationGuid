@@ -28,6 +28,9 @@ public class User implements Serializable {
     private String email;
     @Column(name = "password", length = 255)
     private String password;
+    @Column(name = "userRole")
+    private int userRole;
+
 
 
     public User(){}
@@ -82,6 +85,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(int userRole) {
+        this.userRole = userRole;
     }
 
     public void encodePassword(PasswordEncoder passwordEncoder) {

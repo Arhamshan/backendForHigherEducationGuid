@@ -14,7 +14,7 @@ import java.util.List;
  * Created by I.S.M. ARHAM on 5/9/2017.
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(allowedHeaders="*",allowCredentials="true")
 @RequestMapping("/course")
 public class NewCoursesController {
     @Autowired
@@ -35,13 +35,38 @@ public class NewCoursesController {
     }
 
 
-    //add driver
+    //add course
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<NewCourses> addDriver(@RequestBody NewCourses newCourses){
+    public ResponseEntity<NewCourses> addCourses(@RequestBody NewCourses newCourses){
         NewCourses persistNewCourses = newCoursesService.addNewCourses(newCourses);
         //logger.debug("Added:: " + persistUser);
         return new ResponseEntity<NewCourses>(persistNewCourses,HttpStatus.CREATED);
     }
 
+    //edit courses
+    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
+    public ResponseEntity<NewCourses> editCourses(@RequestBody NewCourses newCourses){
+        NewCourses existingCourses = newCoursesService.getNewCoursesById(newCourses.getId());
+        //logger.debug("Added:: " + persistUser);
+        if (existingCourses == null) {
+            return new ResponseEntity<NewCourses>(HttpStatus.NOT_FOUND);
+        } else {
+            NewCourses persistCourses = newCoursesService.editNewCourses(newCourses);
+            return new ResponseEntity<NewCourses>(persistCourses,HttpStatus.OK);
+        }
+    }
+
+    //delete vehicle
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> deleteCourses(@PathVariable("id") int id) {
+        System.out.println("Data deleting.....");
+        NewCourses existingNewCourses = newCoursesService.getNewCoursesById(id);
+        if (existingNewCourses == null) {
+            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+        } else {
+            newCoursesService.deleteNewCourses(id);
+            return new ResponseEntity<String>("Successfully deleted",HttpStatus.OK);
+        }
+    }
 
 }

@@ -2,7 +2,8 @@ package com.higherEducationGuid.restful.service.Impl;
 
 
 import com.higherEducationGuid.restful.model.User;
-import com.higherEducationGuid.restful.service.UserService;
+import com.higherEducationGuid.restful.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.Collections;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,16 +16,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserService userService;
+    @Autowired
+    private IUserService iUserService;
 
-    public UserDetailsServiceImpl(UserService userService) {
-        this.userService = userService;
+    public UserDetailsServiceImpl() {
+
     }
 
     @Override
     public final UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        final User user = this.userService.lookup(username);
+        final User user = this.iUserService.lookup(username);
         if (user == null) {
             throw new UsernameNotFoundException("User '" + username + "' not found");
         }
